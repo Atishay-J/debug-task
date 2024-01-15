@@ -1,0 +1,20 @@
+{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": false,
+    "importOrder": [
+        "^react(.*)$",
+        "<THIRD_PARTY_MODULES>",
+        "^[../]",
+        "^[./]"
+    ],
+    "importOrderParserPlugins": [
+        "jsx",
+        "typescript",
+        "decorators-legacy"
+    ],
+    "plugins": [
+        "prettier-plugin-tailwindcss"
+    ]
+}
