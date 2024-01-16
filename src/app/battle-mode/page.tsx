@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import GameFAQ from "./_components/game-faq";
 
-export const BATTLE_MODE_STATUS_VARIANTS = {
+const BATTLE_MODE_STATUS_VARIANTS = {
     FREE: "Free Roll",
     PAID: "Cash Battle",
 };
