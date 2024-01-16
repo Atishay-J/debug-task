@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Header from "./_components/header";
 import { getCloudfareUrl } from "@/utils";
@@ -25,14 +25,16 @@ const Banner = ({
         : 0;
 
     useEffect(() => {
-        const scrollElement = document.querySelector("#__next");
+        // const scrollElement = document.querySelector("#__next");
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const handleScroll = (event: any) => {
             const imageHeight = initialHeight
-                ? Math.max(initialHeight - event.target.scrollTop, headerHeight)
+                ? Math.max(
+                      initialHeight - document.documentElement.scrollTop,
+                      headerHeight
+                  )
                 : 0;
-
             const didHeaderCollapse =
                 initialHeight &&
                 imageHeight - liveGamesFinalYOffset <= headerHeight;
@@ -42,10 +44,10 @@ const Banner = ({
             if (!didHeaderCollapse) setScrollY(window.scrollY);
         };
 
-        scrollElement?.addEventListener("scroll", handleScroll);
+        document?.addEventListener("scroll", handleScroll);
 
         return () => {
-            scrollElement?.removeEventListener("scroll", handleScroll);
+            document?.removeEventListener("scroll", handleScroll);
         };
     }, [initialHeight, headerHeight]);
 
@@ -98,7 +100,7 @@ const BattleModeLayout = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div
-            className="bg-dark-black-3 relative m-auto flex w-full max-w-lg flex-col items-center"
+            className="relative m-auto flex w-full max-w-lg flex-col items-center bg-dark-black-3"
             ref={parentRef}
         >
             {parentRef && (
@@ -115,7 +117,7 @@ const BattleModeLayout = ({ children }: { children: React.ReactNode }) => {
                     }}
                     className={`fixed top-0 z-10 mx-auto flex w-full items-center justify-between px-4  ${
                         didHeaderCollapse
-                            ? "bg-primary bg-battle-mode-header"
+                            ? "bg-battle-mode-header bg-primary"
                             : ""
                     }`}
                     style={{
@@ -143,7 +145,7 @@ const BattleModeLayout = ({ children }: { children: React.ReactNode }) => {
                         ease: "linear",
                         duration: animationDuration,
                     }}
-                    className="bg-dark-blue-1 shadow-battle-mode relative flex w-full flex-col rounded-t-[20px]"
+                    className="shadow-battle-mode relative flex w-full flex-col rounded-t-[20px] bg-dark-blue-1"
                 >
                     {children}
                 </motion.div>
